@@ -31,16 +31,19 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.flywaydb:flyway-database-postgresql'
 
-    compile 'com.google.api-client:google-api-client:1.25.0'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.25.0'
-    compile 'com.google.apis:google-api-services-youtube:v3-rev16-1.25.0'
+    implementation 'com.google.api-client:google-api-client:2.8.1'
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.39.0'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev20251217-2.0.0'
+// Source: https://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson2
+    implementation("com.google.http-client:google-http-client-jackson2:2.0.3")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-flyway-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-restclient-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
