@@ -1,13 +1,23 @@
 server:
   port: 8081
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
 spring:
   application:
     name: youtube-extractor
   datasource:
-    url: jdbc:postgresql://localhost:5433/youtube-extractor
+    url: jdbc:postgresql://localhost:5432/youtube-extractor
     username: postgres
-    password: 1234
+    password: cost#123$
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -33,6 +43,12 @@ youtube:
 rag:
   api:
     base-url: "http://localhost:8000"
+
+qdrant:
+  grpc:
+    host: localhost
+    port: 6334
+    api-key: ${QDRANT_API_KEY}
 
 springdoc:
   swagger-ui:
