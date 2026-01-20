@@ -9,8 +9,10 @@ import com.youtube.jpa.dao.ChannelDao;
 import com.youtube.jpa.dao.Video;
 import com.youtube.jpa.repository.ChannelRepository;
 import com.youtube.jpa.repository.VideoRepository;
+import com.youtube.service.event.VideoDiscoveredEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ public class YouTubeChannelVideosService {
 
     private final ChannelRepository channelRepository;
     private final VideoRepository videoRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     private final String apiKey;
     private final YouTube youtube;
@@ -31,11 +34,13 @@ public class YouTubeChannelVideosService {
     public YouTubeChannelVideosService(
             ChannelRepository channelRepository,
             VideoRepository videoRepository,
-            @Value("${youtube.api-key}") String apiKey
+            @Value("${youtube.api-key}") String apiKey,
+            ApplicationEventPublisher applicationEventPublisher
     ) throws Exception {
         this.channelRepository = channelRepository;
         this.videoRepository = videoRepository;
         this.apiKey = apiKey;
+        this.applicationEventPublisher = applicationEventPublisher;
 
         HttpRequestInitializer noAuth = request -> {
             request.setConnectTimeout(30_000);
@@ -89,6 +94,11 @@ public class YouTubeChannelVideosService {
 
         if (!videosForInsert.isEmpty()) {
             videoRepository.saveAll(videosForInsert);
+
+            Long channelDbId = persistedChannelDao.getId();
+            for (Video v : videosForInsert) {
+                applicationEventPublisher.publishEvent(new VideoDiscoveredEvent(v.getYoutubeVideoId(), channelDbId));
+            }
         }
 
         return videoIds;

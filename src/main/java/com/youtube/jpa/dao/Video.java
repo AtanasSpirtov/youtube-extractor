@@ -20,4 +20,8 @@ public class Video {
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "channel_id", nullable = false)
   private ChannelDao channelDao;
+
+  @Column(name = "transcript_passed", nullable = false)
+  private boolean transcriptPassed;
+
 }

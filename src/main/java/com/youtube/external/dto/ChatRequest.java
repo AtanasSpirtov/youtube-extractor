@@ -1,12 +1,13 @@
 package com.youtube.external.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import java.util.Map;
 
 public record ChatRequest(
         String message,
-        @JsonProperty("max_tokens") int maxTokens,
+        List<Map<String, String>> history,
+        int maxTokens,
         double temperature,
-        @JsonProperty("top_p") double topP,
-        @JsonProperty("repeat_penalty") double repeatPenalty,
-        @JsonProperty("clear_history") boolean clearHistory
-) {}
+        double topP,
+        double repeatPenalty
+) { }

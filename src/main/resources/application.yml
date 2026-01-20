@@ -9,6 +9,10 @@ spring:
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 10
+      connection-timeout: 30000
 
   jpa:
     hibernate:
@@ -33,8 +37,43 @@ youtube:
 rag:
   api:
     base-url: "http://localhost:8000"
+  model:
+    properties:
+      max_tokens: 2048
+      temperature: 0.8
+      top_p: 0.3
+      repeat_penalty: 1.2
 
 springdoc:
   swagger-ui:
     path: /swagger
 
+resilience4j:
+  circuitbreaker:
+    instances:
+      transcript429:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 50
+        permittedNumberOfCallsInHalfOpenState: 1
+        waitDurationInOpenState: 30m
+#        recordExceptions:
+#          - com.youtube.external.exception.TranscriptRateLimitedException
+  ratelimiter:
+    instances:
+      transcript:
+        limitForPeriod: 1
+        limitRefreshPeriod: 12s
+        timeoutDuration: 30s
+
+  retry:
+    instances:
+      transcript:
+        maxAttempts: 2
+#        retryExceptions:
+#          - com.youtube.external.exception.TranscriptRateLimitedException
+        waitDuration: 60s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2.0
+        exponentialMaxWaitDuration: 10m
