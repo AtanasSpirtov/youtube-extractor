@@ -1,6 +1,6 @@
 package com.youtube.health;
 
-import com.youtube.external.QdrantGrpsClient;
+import com.youtube.external.rest.qdrant.QdrantGrpsClient;
 import org.springframework.boot.health.contributor.Health;
 import org.springframework.boot.health.contributor.HealthIndicator;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.youtube.service.event;
 
-import com.youtube.external.RagSystemApiClient;
-import com.youtube.external.dto.TranscriptResponse;
+import com.youtube.external.rest.pythonclient.RagSystemRestApiClient;
+import com.youtube.external.rest.pythonclient.dto.TranscriptResponse;
 import com.youtube.jpa.dao.Video;
 import com.youtube.jpa.dao.VideoTranscript;
 import com.youtube.jpa.repository.VideoRepository;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VideoDiscoveredListener {
 
-    private final RagSystemApiClient transcriptClient;
+    private final RagSystemRestApiClient transcriptClient;
     private final VideoRepository videoRepository;
     private final VideoTranscriptRepository transcriptRepository;
 

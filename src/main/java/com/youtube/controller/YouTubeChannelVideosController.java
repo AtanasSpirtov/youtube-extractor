@@ -1,6 +1,6 @@
 package com.youtube.controller;
 
-import com.youtube.service.YouTubeChannelVideosService;
+import com.youtube.service.youtube.YouTubeChannelVideosService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

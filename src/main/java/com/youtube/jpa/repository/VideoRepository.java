@@ -1,5 +1,6 @@
 package com.youtube.jpa.repository;
 
+import com.youtube.jpa.dao.ChannelDao;
 import com.youtube.jpa.dao.Video;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,4 +16,5 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
 
   Optional<Video> findByYoutubeVideoId(String youtubeVideoId);
 
+  List<Video> findVideosByChannelDao(ChannelDao channel);
 }

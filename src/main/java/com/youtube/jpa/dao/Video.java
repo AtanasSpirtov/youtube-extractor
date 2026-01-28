@@ -29,6 +29,9 @@ public class Video {
   @Column(name = "transcript_passed", nullable = false)
   private boolean transcriptPassed;
 
+  @OneToOne(mappedBy = "video", fetch = FetchType.EAGER)
+  private VideoTranscript videoTranscript;
+
   // --- SNIPPET ---
   @Column(name = "title")
   private String title;

@@ -53,7 +53,11 @@ rag:
       temperature: 0.8
       top_p: 0.3
       repeat_penalty: 1.2
-
+  embedding:
+    properties:
+      chunkSize: 1024
+      overlap: 128
+      normalize: true
 qdrant:
   grpc:
     host: localhost

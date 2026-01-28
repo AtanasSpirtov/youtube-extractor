@@ -1,4 +1,4 @@
-package com.youtube.external.dto;
+package com.youtube.external.rest.pythonclient.dto;
 
 import java.util.List;
 import java.util.Map;

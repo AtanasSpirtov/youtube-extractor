@@ -1,9 +1,11 @@
-package com.youtube.external;
+package com.youtube.external.rest.pythonclient;
 
-import com.youtube.external.dto.ChatRequest;
-import com.youtube.external.dto.ChatResponse;
-import com.youtube.external.dto.TranscriptResponse;
 import com.youtube.external.exception.TranscriptRateLimitedException;
+import com.youtube.external.rest.pythonclient.dto.ChatRequest;
+import com.youtube.external.rest.pythonclient.dto.ChatResponse;
+import com.youtube.external.rest.pythonclient.dto.TranscriptResponse;
+import com.youtube.external.rest.pythonclient.dto.EmbedTranscriptRequest;
+import com.youtube.external.rest.pythonclient.dto.EmbedTranscriptResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class RagSystemApiClient {
+public class RagSystemRestApiClient {
 
     private final RestClient restClient;
 
@@ -48,5 +50,15 @@ public class RagSystemApiClient {
             }
             throw e;
         }
+    }
+
+    public EmbedTranscriptResponse embedTranscript(EmbedTranscriptRequest req) {
+        return restClient.post()
+                .uri("/embed_transcript")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .body(req)
+                .retrieve()
+                .body(EmbedTranscriptResponse.class);
     }
 }

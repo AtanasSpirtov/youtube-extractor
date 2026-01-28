@@ -1,11 +1,9 @@
-package com.youtube.service;
+package com.youtube.service.youtube;
 
 import com.google.api.services.youtube.model.Channel;
 import com.youtube.jpa.dao.ChannelDao;
 import com.youtube.jpa.dao.Video;
 import com.youtube.service.event.VideoDiscoveredEvent;
-import com.youtube.service.test.YouTubeClientService;
-import com.youtube.service.test.YouTubeInternalService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;

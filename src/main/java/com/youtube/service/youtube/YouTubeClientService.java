@@ -1,4 +1,4 @@
-package com.youtube.service.test;
+package com.youtube.service.youtube;
 
 import com.google.api.services.youtube.model.*;
 import lombok.RequiredArgsConstructor;

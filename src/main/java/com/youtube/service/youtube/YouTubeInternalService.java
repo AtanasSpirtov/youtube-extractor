@@ -1,4 +1,4 @@
-package com.youtube.service.test;
+package com.youtube.service.youtube;
 
 import com.google.api.services.youtube.model.*;
 import com.youtube.jpa.dao.ChannelDao;
@@ -105,6 +105,10 @@ public class YouTubeInternalService {
         return videoDao;
     }
 
+    public List<ChannelDao> findAllChannels() {
+        return channelRepository.findAll();
+    }
+
     private static ChannelDao buildFromYoutubeChannel(Channel ytChannel, ChannelSnippet snippet) {
         return ChannelDao.builder()
                 .youtubeChannelId(ytChannel.getId())
@@ -112,5 +116,9 @@ public class YouTubeInternalService {
                 .description(snippet.getDescription())
                 .country(snippet.getCountry())
                 .build();
+    }
+
+    public List<Video> findAllVideosForChannel(ChannelDao channel) {
+        return videoRepository.findVideosByChannelDao(channel);
     }
 }
